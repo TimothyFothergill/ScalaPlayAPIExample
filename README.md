@@ -32,3 +32,10 @@ Finally I added a route in `conf/routes`. At this point in the application, my c
 GET     /                           controllers.HomeController.index()
 GET     /our-services               controllers.HomeController.ourservices()
 ```
+
+### Adding dependencies
+
+To add a library dependency, I found the dependency I wanted to work with, in this case Mongo, then added the following 
+line to the `build.sbt` file: \
+```libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.9.0"```
+
