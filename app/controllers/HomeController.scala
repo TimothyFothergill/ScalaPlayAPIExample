@@ -2,14 +2,19 @@ package controllers
 
 import javax.inject._
 import play.api._
+import play.api.libs.json.Json
 import play.api.mvc._
+import models.{ToyModel}
+
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
+class HomeController @Inject()(
+    controllerComponents: ControllerComponents
+) extends AbstractController(controllerComponents) {
 
   /**
    * Create an Action to render an HTML page.
@@ -24,5 +29,13 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   def ourservices() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.ourservices())
+  }
+
+
+  implicit val toyFormat = Json.format[ToyModel]
+
+  def getAll = Action {
+    val toys = new ToyModel(1, "name")
+    Ok(Json.toJson(toys))
   }
 }
